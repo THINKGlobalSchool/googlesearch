@@ -12,10 +12,16 @@
 
 $group = elgg_get_page_owner();
 
-if ($group->googlecustomsearch) {
-	echo urldecode($group->googlecustomsearch);
+// Check for unique id
+if ($group->google_search_unique_id) {
+	// User may have supplied advanced code, so display that
+	if ($group->google_search_advanced) {
+		echo urldecode($group->google_search_advanced);
+	} else { // Just display the default template with the supplied unique id
+		echo elgg_view('googlesearch/default', array('uid' => $group->google_search_unique_id));
+	}
 } else {
-	echo "<br />" . elgg_echo('googlesearch:label:nocustom');
+	echo "<br />" . elgg_echo('googlesearch:label:nocustom') . "<br />";
 }
 
 

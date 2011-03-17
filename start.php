@@ -29,6 +29,9 @@ function googlesearch_init() {
 
 	// add group widget
 	elgg_extend_view('groups/tool_latest', 'googlesearch/group_search');
+	
+	// Extend CSS
+	elgg_extend_view('css/screen','googlesearch/css');
 }
 
 /* Google search page handler */
@@ -45,6 +48,12 @@ function googlesearch_page_handler($page) {
 		} else {
 			$title = elgg_echo('googlesearch');
 			$content = elgg_view('googlesearch/viewsearch');
+			
+			$popup_label = elgg_echo('googlesearch:label:whatisthis');
+			$popup_info = elgg_echo('googlesearch:label:whatisthisinfo');
+
+			
+			$content .= "<span class='googlesearch-popup googlesearch-popleft'>$popup_label<span>$popup_info</span></span>";
 		}
 		
 		
