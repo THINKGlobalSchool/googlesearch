@@ -9,3 +9,25 @@
  * @link http://www.thinkglobalschool.com/
  * 
  */
+
+$group_guid = get_input('googlesearch_group');
+$code = get_input('googlesearch_escaped_code');
+
+$group = get_entity($group_guid);
+
+if (elgg_instanceof($group, 'group') && $group->canEdit()) {
+	if ($code) {
+		// Save code
+		$group->googlecustomsearch = $code;
+		
+		// Forward on
+		system_message(elgg_echo('googlesearch:success:savecode'));
+		forward($group->getURL());
+	} else {
+		register_error(elgg_echo('googlesearch:error:coderequired'));
+		forward(REFERER);
+	}
+} else {
+	register_error(elgg_echo('googlesearch:error:invalidgroup'));
+	forward(REFERER);
+}

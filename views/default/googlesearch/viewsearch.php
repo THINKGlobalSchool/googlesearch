@@ -9,3 +9,13 @@
  * @link http://www.thinkglobalschool.com/
  * 
  */
+
+$group = elgg_get_page_owner();
+
+if ($group->googlecustomsearch) {
+	echo urldecode($group->googlecustomsearch);
+} else {
+	echo "<br />" . elgg_echo('googlesearch:label:nocustom');
+}
+
+
