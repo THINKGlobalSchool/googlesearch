@@ -55,7 +55,7 @@ $english = array(
 	// Messages
 	'googlesearch:success:save' => 'Google Custom Search saved successfully',
 	'googlesearch:error:invalidgroup' => 'Invalid group',
-	'googlesearch:error:idrequired' => 'Search ID is required',
+	'googlesearch:error:required' => 'You need to supply a custom search id or custom search code',
 	
 	// Other content
 

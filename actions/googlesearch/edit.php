@@ -17,7 +17,7 @@ $advanced_code = get_input('googlesearch_escaped_code');
 $group = get_entity($group_guid);
 
 if (elgg_instanceof($group, 'group') && $group->canEdit()) {
-	if ($unique_id) {
+	if ($unique_id || $advanced_code) {
 		// Save advanced code if supplied
 		$group->google_search_advanced = $advanced_code;
 		
@@ -28,7 +28,7 @@ if (elgg_instanceof($group, 'group') && $group->canEdit()) {
 		system_message(elgg_echo('googlesearch:success:save'));
 		forward($group->getURL());
 	} else {
-		register_error(elgg_echo('googlesearch:error:idrequired'));
+		register_error(elgg_echo('googlesearch:error:required'));
 		forward(REFERER);
 	}
 } else {
