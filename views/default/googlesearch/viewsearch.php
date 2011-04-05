@@ -13,7 +13,7 @@
 $group = elgg_get_page_owner();
 
 // Check for unique id
-if ($group->google_search_unique_id) {
+if ($group->google_search_unique_id || $group->google_search_advanced) {
 	// User may have supplied advanced code, so display that
 	if ($group->google_search_advanced) {
 		echo urldecode($group->google_search_advanced);
