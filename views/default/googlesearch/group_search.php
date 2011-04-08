@@ -12,14 +12,16 @@
 
 $group = elgg_get_page_owner();
 
-if ($group->canEdit()) {
-	$edit_link = " | <a href='" . elgg_get_site_url() . "pg/googlesearch/{$group->getGUID()}/edit'>" .
-	 elgg_echo('googlesearch:label:owneredit') . 
-	"</a>";
-}
+if ($group->googlesearch_enable == 'yes') {
+	
+	if ($group->canEdit()) {
+		$edit_link = " | <a href='" . elgg_get_site_url() . "pg/googlesearch/{$group->getGUID()}/edit'>" .
+		 elgg_echo('googlesearch:label:owneredit') . 
+		"</a>";
+	}
 
-$popup_label = elgg_echo('googlesearch:label:whatisthis');
-$popup_info = elgg_echo('googlesearch:label:whatisthisinfo');
+	$popup_label = elgg_echo('googlesearch:label:whatisthis');
+	$popup_info = elgg_echo('googlesearch:label:whatisthisinfo');
 
 ?>
 <div class="group_tool_widget search">
@@ -30,3 +32,7 @@ $popup_info = elgg_echo('googlesearch:label:whatisthisinfo');
 	<h3><?php echo elgg_echo("googlesearch"); ?></h3>
 	<?php echo elgg_view('googlesearch/viewsearch'); ?>
 </div>
+
+<?php
+}
+?>
