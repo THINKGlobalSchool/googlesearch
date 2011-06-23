@@ -10,16 +10,17 @@
  * 
  */
 
-$group = elgg_get_page_owner();
+$group = elgg_get_page_owner_entity();
 
 // Check for unique id
 if ($group->google_search_unique_id || $group->google_search_advanced) {
 	// User may have supplied advanced code, so display that
 	if ($group->google_search_advanced) {
-		echo urldecode($group->google_search_advanced);
+		$content = urldecode($group->google_search_advanced);
 	} else { // Just display the default template with the supplied unique id
-		echo elgg_view('googlesearch/default', array('uid' => $group->google_search_unique_id));
+		$content = elgg_view('googlesearch/default', array('uid' => $group->google_search_unique_id));
 	}
+	echo $content;
 } else {
 	echo "<br />" . elgg_echo('googlesearch:label:nocustom') . "<br />";
 }

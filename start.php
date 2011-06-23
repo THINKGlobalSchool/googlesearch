@@ -15,14 +15,14 @@ elgg_register_event_handler('init', 'system', 'googlesearch_init');
 function googlesearch_init() {
 	
 	// Register actions
-	$action_base = elgg_get_plugin_path() . "googlesearch/actions/googlesearch";
+	$action_base = elgg_get_plugins_path() . "googlesearch/actions/googlesearch";
 	elgg_register_action('googlesearch/edit', "$action_base/edit.php");
 	
 	// Page handler
-	register_page_handler('googlesearch','googlesearch_page_handler');
+	elgg_register_page_handler('googlesearch','googlesearch_page_handler');
 	
 	// Profile hook	
-	elgg_register_plugin_hook_handler('profile_menu', 'profile', 'googlesearch_profile_menu');
+	elgg_register_plugin_hook_handler('register', 'menu:owner_block', 'googlesearch_owner_block_menu');
 	
 	// add the group pages tool option     
     add_group_tool_option('googlesearch',elgg_echo('groups:enablegooglesearch'),true);
@@ -30,38 +30,56 @@ function googlesearch_init() {
 	// add group widget
 	elgg_extend_view('groups/tool_latest', 'googlesearch/group_search');
 	
-	// Extend CSS
-	elgg_extend_view('css/screen','googlesearch/css');
+	// Register CSS
+	$gs_css = elgg_get_simplecache_url('css', 'googlesearch/css');
+	elgg_register_css('elgg.googlesearch', $gs_css);
+	
+	// Register JS
+	$gs_js = elgg_get_simplecache_url('js', 'googlesearch/googlesearch');
+	elgg_register_js('elgg.googlesearch', $gs_js);
 }
 
 /* Google search page handler */
 function googlesearch_page_handler($page) {
-	set_context('googlesearch');
+	elgg_set_context('googlesearch');
 	$group = get_entity($page[0]);
 	
 	if (elgg_instanceof($group, 'group')) {
 		elgg_set_page_owner_guid($group->getGUID());
 		
+		// Breadcrumbs
+		elgg_push_breadcrumb(elgg_echo('groups'), 'groups');
+		elgg_push_breadcrumb($group->name, $group->getURL());
+		
+		// Load CSS & JS
+		elgg_load_css('elgg.googlesearch');
+		elgg_load_js('elgg.googlesearch');
+		
 		if ($page[1] == 'edit') {
+			elgg_push_breadcrumb(elgg_echo('googlesearch:label:customsearch'), 'googlesearch/' . $group->guid);
+			elgg_push_breadcrumb(elgg_echo('edit'));
+			
 			$title = elgg_echo('googlesearch:title:editgooglesearch');
-			$content = elgg_view('forms/googlesearch/edit');
+			$content = elgg_view_form('googlesearch/edit', array('name' => 'googlesearch-save-form', 'id' => 'googlesearch_save_form'));
 		} else {
+			elgg_push_breadcrumb(elgg_echo('googlesearch:label:customsearch'));
+			
 			$title = elgg_echo('googlesearch');
 			$content = elgg_view('googlesearch/viewsearch');
 			
 			$popup_label = elgg_echo('googlesearch:label:whatisthis');
-			$popup_info = elgg_echo('googlesearch:label:whatisthisinfo');
-
-			
-			$content .= "<span class='googlesearch-popup googlesearch-popleft'>$popup_label<span>$popup_info</span></span>";
+			$popup_info = elgg_echo('googlesearch:label:whatisthisinfo');			
+			$content .= "<a rel='popup' href='#info'>$popup_label</a><div id='info' class='googlesearch-popup' style='display: none;'>$popup_info</div>";
 		}
 		
 		
 		$params = array(
-			'content' => elgg_view_title($title) . $content
+			'header' => elgg_view_title($title),
+			'filter' => FALSE,
+			'content' => $content
 		);
 		
-		$body = elgg_view_layout('one_column_with_sidebar', $params);
+		$body = elgg_view_layout('content', $params);
 
 		echo elgg_view_page($title, $body);
 	} else {
@@ -70,22 +88,20 @@ function googlesearch_page_handler($page) {
 }
 
 /**
- * Plugin hook to add polls's to users profile block
+ * Plugin hook to add polls's to groups profile block
  * 	
  * @param unknown_type $hook
- * @param unknown_type $entity_type
- * @param unknown_type $returnvalue
+ * @param unknown_type $type
+ * @param unknown_type $return
  * @param unknown_type $params
  * @return unknown
  */
-function googlesearch_profile_menu($hook, $entity_type, $return_value, $params) {
-	// Only display on group owner block if enabled
-	if ($params['owner'] instanceof ElggGroup && $params['owner']->googlesearch_enable == 'yes') {
-		$return_value[] = array(
-			'text' => elgg_echo('googlesearch:label:customsearch'),
-			'href' => elgg_get_site_url() . "pg/googlesearch/{$params['owner']->getGUID()}",
-		);
-	}
+function googlesearch_owner_block_menu($hook, $type, $return, $params) {
+	if (elgg_instanceof($params['entity'], 'group') && $params['entity']->googlesearch_enable == 'yes') {
+		$url = elgg_get_site_url() . "googlesearch/{$params['entity']->guid}";
+		$item = new ElggMenuItem('googlesearch', elgg_echo('googlesearch:label:customsearch'), $url);
+		$return[] = $item;
+	} 
 
-	return $return_value;
+	return $return;
 }

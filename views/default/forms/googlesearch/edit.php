@@ -10,41 +10,39 @@
  * 
  */
 
-$group = elgg_get_page_owner();
+$group = elgg_get_page_owner_entity();
 
 $id_label = elgg_echo('googlesearch:label:uniqueid');
 $id_input = elgg_view('input/text', array(
-	'internalid' => 'googlesearch-unique-id',
-	'internalname' => 'googlesearch_unique_id',
+	'id' => 'googlesearch-unique-id',
+	'name' => 'googlesearch_unique_id',
 	'value' => $group->google_search_unique_id
 ));
 
-$advanced_label = elgg_echo('googlesearch:label:advanced');
-
 $code_label =  elgg_echo('googlesearch:label:code');
 $code_input = elgg_view('input/plaintext', array(
-	'internalid' => 'googlesearch-code',
-	'internalname' => 'googlesearch_code',
+	'id' => 'googlesearch-code',
+	'name' => 'googlesearch_code',
 	'value' => urldecode($group->google_search_advanced)
 ));
 
 $escaped_code_input = elgg_view('input/hidden', array(
-	'internalid' => 'googlesearch-escaped-code',
-	'internalname' => 'googlesearch_escaped_code',
+	'id' => 'googlesearch-escaped-code',
+	'name' => 'googlesearch_escaped_code',
 	'value' => $group->google_search_advanced,
 ));
 
 $save_input = elgg_view('input/submit', array(
-	'internalid' => 'googlesearch-save',
-	'internalname' => 'googlesearch_save',
+	'id' => 'googlesearch-save',
+	'name' => 'googlesearch_save',
 	'value' => elgg_echo('googlesearch:label:save')
 ));
 
 
 
 $group_hidden_input = elgg_view('input/hidden', array(
-	'internalid' => 'googlesearch-group',
-	'internalname' => 'googlesearch_group',
+	'id' => 'googlesearch-group',
+	'name' => 'googlesearch_group',
 	'value' => $group->getGUID(),
 ));
 
@@ -54,47 +52,32 @@ if ($group->google_search_advanced) {
 	$display = "none";
 }
 
+
+$basic_label = elgg_echo('googlesearch:label:basic');
+$advanced_label = "<a class='elgg-toggler' href='#advanced-custom'>" . elgg_echo('googlesearch:label:advanced') . "</a>";
+
 $basic_instructions = elgg_echo('googlesearch:label:basicinstructions');
 $advanced_instructions = elgg_echo('googlesearch:label:advancedinstructions');
 
-$form_body = <<<EOT
-	<div style='padding-top: 10px;'>
-		<div class='googlesearch-instructions'>
-			$basic_instructions
+$advanced_content = "<div style='display: $display;' id='advanced-custom'>$advanced_instructions<br /><label>$code_label</label>$code_input</div>";
+
+$basic_module = elgg_view_module('info', $basic_label, $basic_instructions);
+$advanced_module = elgg_view_module('info', $advanced_label, $advanced_content);
+
+$form_body = <<<HTML
+		<div>
+			$basic_module
+			<label>$id_label</label>
+			$id_input
 		</div>
-		<label>$id_label</label>
-		$id_input
-		<br /><br />
-		<a id='googlesearch-showadvanced' href='#'>$advanced_label</a>
-		<br /><br />
-		<div style='display: $display;' id='googlesearch-advanced'>
-			<div class='googlesearch-instructions'>
-				$advanced_instructions
-			</div>
-			<label>$code_label</label>
-			$code_input
-			<br /><br />
+		<div>
+			$advanced_module
 		</div>
+		<br />
 		$save_input
 		$group_hidden_input
 		$escaped_code_input
 	</div>
-	<script type='text/javascript'>
-		$(document).ready(function() {
-			$('#googlesearch-showadvanced').click(function() {
-				$('#googlesearch-advanced').toggle('slow');
-			});
-			
-			$('#googlesearch-save-form').submit(function() {
-				$('#googlesearch-escaped-code').val(escape($('#googlesearch-code').val())); 
-			});
-		});
-	</script>
-EOT;
+HTML;
 
-echo elgg_view('input/form', array(
-	'internalid' => 'googlesearch-save-form',
-	'internalname' => 'googlesearch_save_form',
-	'body' => $form_body,
-	'action' => elgg_get_site_url() . 'action/googlesearch/edit'
-));
+echo $form_body;
