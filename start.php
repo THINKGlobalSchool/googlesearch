@@ -99,7 +99,7 @@ function googlesearch_page_handler($page) {
 function googlesearch_owner_block_menu($hook, $type, $return, $params) {
 	if (elgg_instanceof($params['entity'], 'group') && $params['entity']->googlesearch_enable == 'yes') {
 		$url = elgg_get_site_url() . "googlesearch/{$params['entity']->guid}";
-		$item = new ElggMenuItem('googlesearch', elgg_echo('googlesearch:label:customsearch'), $url);
+		$item = new ElggMenuItem('googlesearch', elgg_echo('googlesearch:group'), $url);
 		$return[] = $item;
 	} 
 

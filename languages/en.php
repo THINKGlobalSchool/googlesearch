@@ -14,6 +14,7 @@ $english = array(
 	
 	// Generic
 	'googlesearch' => 'Google Custom Search',
+	'googlesearch:group' => 'Group google search',
 	'groups:enablegooglesearch' => 'Enable google custom search',
 	
 	// Page titles 
