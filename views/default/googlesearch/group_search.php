@@ -31,4 +31,6 @@ $header .= '<h3>' . elgg_echo("googlesearch") . '</h3>';
 
 $content = elgg_view('googlesearch/viewsearch');
 
-echo elgg_view_module('info', '', $content, array('header' => $header));
+echo "<li>";
+echo elgg_view_module('info', '', $content, array('header' => $header, 'class' => 'elgg-module-group'));
+echo "</li>";
