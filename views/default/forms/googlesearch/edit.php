@@ -54,7 +54,7 @@ if ($group->google_search_advanced) {
 
 
 $basic_label = elgg_echo('googlesearch:label:basic');
-$advanced_label = "<a class='elgg-toggler' href='#advanced-custom'>" . elgg_echo('googlesearch:label:advanced') . "</a>";
+$advanced_label = "<a rel='toggle' href='#advanced-custom'>" . elgg_echo('googlesearch:label:advanced') . "</a>";
 
 $basic_instructions = elgg_echo('googlesearch:label:basicinstructions');
 $advanced_instructions = elgg_echo('googlesearch:label:advancedinstructions');

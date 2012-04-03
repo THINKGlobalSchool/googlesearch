@@ -61,20 +61,36 @@ function googlesearch_page_handler($page) {
 			
 			$title = elgg_echo('googlesearch:title:editgooglesearch');
 			$content = elgg_view_form('googlesearch/edit', array('name' => 'googlesearch-save-form', 'id' => 'googlesearch_save_form'));
+			
+			$header = elgg_view_title($title);
 		} else {
 			elgg_push_breadcrumb(elgg_echo('googlesearch:label:customsearch'));
 			
 			$title = elgg_echo('googlesearch');
-			$content = elgg_view('googlesearch/viewsearch');
+			$header = ' ';
+			 
+			if ($group->canEdit()) {
+				$edit_link = " | <a href='" . elgg_get_site_url() . "googlesearch/{$group->getGUID()}/edit'>" .
+				 elgg_echo('googlesearch:label:owneredit') . 
+				"</a>";
+			}
+
+			$body .= elgg_view('googlesearch/viewsearch');
 			
 			$popup_label = elgg_echo('googlesearch:label:whatisthis');
 			$popup_info = elgg_echo('googlesearch:label:whatisthisinfo');			
-			$content .= "<a rel='popup' href='#info'>$popup_label</a><div id='info' class='googlesearch-popup' style='display: none;'>$popup_info</div>";
+			
+			$module_title = $title . "<span class='right'><a rel='popup' href='#info'>$popup_label</a><div id='info' class='googlesearch-popup' style='display: none;'>$popup_info</div>$edit_link</span>";
+			
+			$module_content = elgg_view('googlesearch/viewsearch');
+			
+			
+			$content = elgg_view_module('featured', $module_title, $module_content);		
 		}
 		
 		
 		$params = array(
-			'header' => elgg_view_title($title),
+			'header' => $header,
 			'filter' => FALSE,
 			'content' => $content
 		);

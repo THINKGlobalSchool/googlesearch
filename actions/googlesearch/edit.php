@@ -26,10 +26,10 @@ if (elgg_instanceof($group, 'group') && $group->canEdit()) {
 		
 		// Forward on
 		system_message(elgg_echo('googlesearch:success:save'));
-		forward($group->getURL());
+		forward(elgg_get_site_url() . "googlesearch/{$group->guid}");
 	} else {
 		register_error(elgg_echo('googlesearch:error:required'));
-		forward(REFERER);
+		forward(elgg_get_site_url() . "googlesearch/{$group->guid}");
 	}
 } else {
 	register_error(elgg_echo('googlesearch:error:invalidgroup'));

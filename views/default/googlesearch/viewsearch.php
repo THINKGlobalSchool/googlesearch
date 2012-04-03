@@ -22,7 +22,7 @@ if ($group->google_search_unique_id || $group->google_search_advanced) {
 	}
 	echo $content;
 } else {
-	echo "<br />" . elgg_echo('googlesearch:label:nocustom') . "<br />";
+	echo elgg_echo('googlesearch:label:nocustom') . "<br />";
 }
 
 
