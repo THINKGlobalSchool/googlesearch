@@ -32,7 +32,7 @@ function googlesearch_init() {
     add_group_tool_option('googlesearch',elgg_echo('groups:enablegooglesearch'),true);
 
 	// add group widget
-	elgg_extend_view('groups/tool_latest', 'googlesearch/group_search');
+	elgg_extend_view('groups/tool_latest', 'googlesearch/group_tool');
 	
 	// Register CSS
 	$gs_css = elgg_get_simplecache_url('css', 'googlesearch/css');

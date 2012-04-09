@@ -19,6 +19,10 @@ ul.square {
 	list-style: square inside none !important;
 }
 
+.googlesearch-small {
+	font-size: 85% !important; 
+}
+
 .googlesearch-desc {
 }
 
