@@ -5,7 +5,7 @@
  * @package Google Custom Search
  * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU Public License version 2
  * @author Jeff Tilson
- * @copyright THINK Global School 2010
+ * @copyright THINK Global School 2010 - 2012
  * @link http://www.thinkglobalschool.com/
  * 
  */
@@ -32,6 +32,7 @@ $english = array(
 	'googlesearch:label:save' => 'Save',
 	'googlesearch:label:uniqueid' => 'Google Search ID',
 	'googlesearch:label:advanced' => 'Advanced Instructions >>>',
+	'googlesearch:label:titledesc' => 'Title & Description (Optional)',
 	'googlesearch:label:basic' => 'Basic Instructions',
 	'googlesearch:label:whatisthis' => 'What is this?',
 	'googlesearch:label:whatisthisinfo' => 'Google custom search allows you to create your own customized search experience. You can include one or more specific websites and customize the look and feel of the search results.<br /> <br />For more information visit the Google Custom Search homepage: <a href="http://www.google.com/cse/">http://www.google.com/cse</a>',

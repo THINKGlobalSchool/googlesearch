@@ -5,9 +5,13 @@
  * @package Google Custom Search
  * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU Public License version 2
  * @author Jeff Tilson
- * @copyright THINK Global School 2010
+ * @copyright THINK Global School 2010 - 2012
  * @link http://www.thinkglobalschool.com/
  * 
+ * @TODO
+ * - Allow for multiple google custom searches (will probably need to think about creating entities)
+ * - Script to convert old metadata custom searches into above entities
+ * - New interface for creating/managing multiple google searches
  */
 
 elgg_register_event_handler('init', 'system', 'googlesearch_init');
@@ -56,6 +60,7 @@ function googlesearch_page_handler($page) {
 		elgg_load_js('elgg.googlesearch');
 		
 		if ($page[1] == 'edit') {
+			// Edit the custom search
 			elgg_push_breadcrumb(elgg_echo('googlesearch:label:customsearch'), 'googlesearch/' . $group->guid);
 			elgg_push_breadcrumb(elgg_echo('edit'));
 			
@@ -64,31 +69,15 @@ function googlesearch_page_handler($page) {
 			
 			$header = elgg_view_title($title);
 		} else {
+			// Display the custom search
 			elgg_push_breadcrumb(elgg_echo('googlesearch:label:customsearch'));
 			
 			$title = elgg_echo('googlesearch');
 			$header = ' ';
-			 
-			if ($group->canEdit()) {
-				$edit_link = " | <a href='" . elgg_get_site_url() . "googlesearch/{$group->getGUID()}/edit'>" .
-				 elgg_echo('googlesearch:label:owneredit') . 
-				"</a>";
-			}
 
-			$body .= elgg_view('googlesearch/viewsearch');
-			
-			$popup_label = elgg_echo('googlesearch:label:whatisthis');
-			$popup_info = elgg_echo('googlesearch:label:whatisthisinfo');			
-			
-			$module_title = $title . "<span class='right'><a rel='popup' href='#info'>$popup_label</a><div id='info' class='googlesearch-popup' style='display: none;'>$popup_info</div>$edit_link</span>";
-			
-			$module_content = elgg_view('googlesearch/viewsearch');
-			
-			
-			$content = elgg_view_module('featured', $module_title, $module_content);		
+			$content = elgg_view('googlesearch/group_search', array('group' => $group));
 		}
-		
-		
+	
 		$params = array(
 			'header' => $header,
 			'filter' => FALSE,
