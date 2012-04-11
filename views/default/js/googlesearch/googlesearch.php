@@ -19,20 +19,15 @@ elgg.googlesearch.init = function() {
 		$('#googlesearch-escaped-code').val(escape($('#googlesearch-code').val())); 
 		$('#googlesearch-code').attr('disabled', 'DISABLED');
 	});
-	
-	elgg.googlesearch.positionDescription();
 }
 
 elgg.googlesearch.positionDescription = function() {
-	$description = $('.googlesearch-desc');
-
 	// Set another onload callback to hide the description when a search is performed
 	// (Actually hides on div resize)
 	google.setOnLoadCallback(function() {
 		$('.googlesearch-module').resize(function(event) {
 			if ($('.googlesearch-desc').is(':visible')) {
 				$('.googlesearch-desc').hide();
-				console.log('hiding desc');
 			}
 		});
 	}, true);

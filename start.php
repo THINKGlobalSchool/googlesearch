@@ -76,6 +76,9 @@ function googlesearch_page_handler($page) {
 			$header = ' ';
 
 			$content = elgg_view('googlesearch/group_search', array('group' => $group));
+			
+			// Need to include this js after the main module
+			$content .= "<script type='text/javascript'>elgg.googlesearch.positionDescription();</script>";
 		}
 	
 		$params = array(
