@@ -36,10 +36,12 @@ function googlesearch_init() {
 	
 	// Register CSS
 	$gs_css = elgg_get_simplecache_url('css', 'googlesearch/css');
+	elgg_register_simplecache_view('css/googlesearch/css');
 	elgg_register_css('elgg.googlesearch', $gs_css);
 	
 	// Register JS
 	$gs_js = elgg_get_simplecache_url('js', 'googlesearch/googlesearch');
+	elgg_register_simplecache_view('js/googlesearch/googlesearch');
 	elgg_register_js('elgg.googlesearch', $gs_js);
 }
 
