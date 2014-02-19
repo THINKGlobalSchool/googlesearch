@@ -5,7 +5,7 @@
  * @package Google Custom Search
  * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU Public License version 2
  * @author Jeff Tilson
- * @copyright THINK Global School 2010 - 2012
+ * @copyright THINK Global School 2010 - 2014
  * @link http://www.thinkglobalschool.com/
  * 
  * This is the default google custom search embed code, without any theme customizations
@@ -25,6 +25,6 @@ echo <<<EOT
 	    customSearchControl.draw('cse');
 	  }, true);
 	</script>
-	<link rel="stylesheet" href="http://www.google.com/cse/style/look/default.css" type="text/css" />
+	<link rel="stylesheet" href="https://www.google.com/cse/style/look/default.css" type="text/css" />
 EOT;
 ?>
