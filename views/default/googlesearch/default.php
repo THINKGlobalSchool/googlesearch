@@ -16,7 +16,7 @@ $unique_id = $vars['uid'];
 
 echo <<<EOT
 	<div id="cse" style="width: 100%;">Loading</div>
-	<script src="http://www.google.com/jsapi" type="text/javascript"></script>
+	<script src="https://www.google.com/jsapi" type="text/javascript"></script>
 	<script type="text/javascript">
 	  google.load('search', '1', {language : 'en'});
 	  google.setOnLoadCallback(function() {
