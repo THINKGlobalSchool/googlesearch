@@ -5,7 +5,7 @@
  * @package Google Custom Search
  * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU Public License version 2
  * @author Jeff Tilson
- * @copyright THINK Global School 2010 - 2012
+ * @copyright THINK Global School 2010 - 2014
  * @link http://www.thinkglobalschool.com/
  * 
  * @TODO
@@ -36,12 +36,10 @@ function googlesearch_init() {
 	
 	// Register CSS
 	$gs_css = elgg_get_simplecache_url('css', 'googlesearch/css');
-	elgg_register_simplecache_view('css/googlesearch/css');
 	elgg_register_css('elgg.googlesearch', $gs_css);
 	
 	// Register JS
 	$gs_js = elgg_get_simplecache_url('js', 'googlesearch/googlesearch');
-	elgg_register_simplecache_view('js/googlesearch/googlesearch');
 	elgg_register_js('elgg.googlesearch', $gs_js);
 }
 
@@ -78,9 +76,6 @@ function googlesearch_page_handler($page) {
 			$header = ' ';
 
 			$content = elgg_view('googlesearch/group_search', array('group' => $group));
-			
-			// Need to include this js after the main module
-			$content .= "<script type='text/javascript'>elgg.googlesearch.positionDescription();</script>";
 		}
 	
 		$params = array(

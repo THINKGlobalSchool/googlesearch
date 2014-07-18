@@ -8,23 +8,42 @@
  * @copyright THINK Global School 2010 - 2014
  * @link http://www.thinkglobalschool.com/
  * 
- * This is the default google custom search embed code, without any theme customizations
- * or preferences changes. This will only display results from the supplied pages
  */
 
 $unique_id = $vars['uid'];
 
-echo <<<EOT
-	<div id="cse" style="width: 100%;">Loading</div>
-	<script src="https://www.google.com/jsapi" type="text/javascript"></script>
-	<script type="text/javascript">
-	  google.load('search', '1', {language : 'en'});
-	  google.setOnLoadCallback(function() {
-	    var customSearchControl = new google.search.CustomSearchControl('$unique_id');
-	    customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
-	    customSearchControl.draw('cse');
-	  }, true);
+echo <<<HTML
+	<script>
+		var hide_description = function() {
+			if ($('.googlesearch-desc').is(':visible')) {
+				$('.googlesearch-desc').hide();
+			}
+		}
+
+		var loadCallback = function() {
+			$('input.gsc-input').keyup(function(e) { if(e.keyCode == 13 || e.which == 13) {  
+				hide_description();
+			}});
+
+     		$('input.gsc-search-button').on('click', function(e) { 
+     			hide_description();
+     		});
+		}
+
+		window.__gcse = {
+			callback: loadCallback,
+		};
+		(function() {
+			var cx = '$unique_id';
+			var gcse = document.createElement('script');
+			gcse.type = 'text/javascript';
+			gcse.async = true;
+			gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+				'//www.google.com/cse/cse.js?cx=' + cx;
+			var s = document.getElementsByTagName('script')[0];
+			s.parentNode.insertBefore(gcse, s);
+		})();
 	</script>
-	<link rel="stylesheet" href="https://www.google.com/cse/style/look/default.css" type="text/css" />
-EOT;
+	<gcse:search></gcse:search>
+HTML;
 ?>

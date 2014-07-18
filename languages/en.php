@@ -5,7 +5,7 @@
  * @package Google Custom Search
  * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU Public License version 2
  * @author Jeff Tilson
- * @copyright THINK Global School 2010 - 2012
+ * @copyright THINK Global School 2010 - 2014
  * @link http://www.thinkglobalschool.com/
  * 
  */
@@ -20,9 +20,7 @@ $english = array(
 	// Page titles 
 	'googlesearch:title:editgooglesearch' => 'Edit Group Custom Search',
 
-	
 	// Menu items
-
 
 	// Labels 
 	'googlesearch:label:customsearch' => 'Google Custom Search',
@@ -31,7 +29,6 @@ $english = array(
 	'googlesearch:label:code' => 'Google Search Code',
 	'googlesearch:label:save' => 'Save',
 	'googlesearch:label:uniqueid' => 'Google Search ID',
-	'googlesearch:label:advanced' => 'Advanced Instructions >>>',
 	'googlesearch:label:titledesc' => 'Title & Description (Optional)',
 	'googlesearch:label:basic' => 'Basic Instructions',
 	'googlesearch:label:whatisthis' => 'What is this?',
@@ -40,18 +37,9 @@ $english = array(
 	'googlesearch:label:basicinstructions' => '
 		<ul class="square">
 			<li>Visit <a href="http://www.google.com/cse/">http://www.google.com/cse/</a> to <b>Create a Custom Search</b> Engine (or manage your existing search engines if you\'ve already created one).</li>
-			<li> Once your search engine is created visit the <a href="http://www.google.com/cse/manage/all">custom search management page</a> and click on <b>Control Panel</b> next to the custom search you want to include.</li>
-			<li>Look for the <b>Search engine unique ID</b> and enter into the box below</li>
+			<li>Once your search engine is created visit the <a href="http://www.google.com/cse/manage/all">custom search management page</a> and click on the search engine in the list.</li>
+			<li>On the <b>Basics</b> tab, click on the <b>Search Engine ID</b> button, copy and paste the ID into the box below</li>
 		</ul>',
-	
-	'googlesearch:label:advancedinstructions' => '
-		If you have customized the look and feel or any other preferences for your custom search, you will need to enter the custom search code below<br /><br />
-		<ul class="square">
-			<li>Visit the <a href="http://www.google.com/cse/manage/all">custom search management page</a> and click on <b>Control Panel</b> next to the custom search you want to include.</li>
-			<li>Click on <b>Get code</b> from the menu on the left</li>
-			<li>Copy and paste the code supplied into the box below</li>
-		</ul>',
-
 
 	// Messages
 	'googlesearch:success:save' => 'Google Custom Search saved successfully',

@@ -4,13 +4,13 @@
 	<category>tgs</category>
 	<category>enhancements</category>
 	<author>Jeff Tilson</author>
-	<version>1.8</version>
+	<version>1.9</version>
 	<description>Provides Google Custom Search functionality (right now just for groups)</description>
 	<website>http://www.thinkglobalschool.com</website>
 	<copyright>THINK Global School 2010 - 2014</copyright>
 	<requires>
 		<type>elgg_release</type>
-		<version>1.8</version>
+		<version>1.9</version>
 	</requires>
 	<activate_on_install>true</activate_on_install>
 </plugin_manifest>
