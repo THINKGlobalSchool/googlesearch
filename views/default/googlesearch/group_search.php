@@ -28,7 +28,7 @@ $popup_info = elgg_echo('googlesearch:label:whatisthisinfo');
 $custom_title = $group->google_search_title ? $group->google_search_title : elgg_echo('googlesearch');
 
 // Build module
-$module_title = $custom_title . "<span class='googlesearch-small right'><a rel='popup' href='#info'>$popup_label</a><div id='info' class='googlesearch-popup' style='display: none;'>$popup_info</div>$edit_link</span>";
+$module_title = $custom_title . "<span class='googlesearch-small float-right'><a rel='popup' href='#info'>$popup_label</a><div id='info' class='googlesearch-popup' style='display: none;'>$popup_info</div>$edit_link</span>";
 $module_content = elgg_view('googlesearch/viewsearch', $vars);
 
 $content = elgg_view_module('featured', $module_title, $module_content, array('class' => 'googlesearch-module'));
